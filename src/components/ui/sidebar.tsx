@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/contexts/ThemeContext";
 
 /* ============================
-   🎨 Neumorphic Sidebar Context
-   ============================ */
+   🎨 Sidebar Context
+============================ */
 interface Links {
   label: string;
   href: string;
@@ -27,7 +27,7 @@ const SidebarContext = createContext<SidebarContextProps | undefined>(
 
 export const useSidebar = () => {
   const context = useContext(SidebarContext);
-  if (!context) throw new Error("useSidebar must be used within SidebarProvider");
+  if (!context) throw new Error("useSidebar must be used inside SidebarProvider");
   return context;
 };
 
@@ -55,7 +55,7 @@ export const SidebarProvider = ({
 
 /* ============================
    💻 Main Sidebar Container
-   ============================ */
+============================ */
 export const Sidebar = ({
   children,
   open,
@@ -72,9 +72,6 @@ export const Sidebar = ({
   </SidebarProvider>
 );
 
-/* ============================
-   🖥 Desktop Sidebar
-   ============================ */
 export const SidebarBody = ({
   className,
   children,
@@ -88,6 +85,9 @@ export const SidebarBody = ({
   </>
 );
 
+/* ============================
+   🖥 Desktop Sidebar
+============================ */
 export const DesktopSidebar = ({
   className,
   children,
@@ -108,31 +108,20 @@ export const DesktopSidebar = ({
         className
       )}
       initial={{ x: -60, opacity: 0 }}
-      animate={{
-        x: 0,
-        opacity: 1,
-        /* ----  NO width HERE  ---- */
-      }}
+      animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.22, ease: [0.25, 0.8, 0.25, 1] }}
-      /* --------------  width set via CSS variable -------------- */
       style={{ width: animate ? (open ? 260 : 80) : 260 }}
-      onMouseEnter={() => {
-        clearTimeout(hoverTimeout.current);
-        animate && setOpen(true);
-      }}
-      onMouseLeave={() => {
-        hoverTimeout.current = setTimeout(() => animate && setOpen(false), 100);
-      }}
+      onMouseEnter={() => animate && setOpen(true)}
+      onMouseLeave={() => (hoverTimeout.current = setTimeout(() => animate && setOpen(false), 120))}
     >
       {children}
     </motion.div>
   );
 };
 
-
 /* ============================
-   📱 Mobile Top Bar
-   ============================ */
+   📱 Mobile Navigation
+============================ */
 export const MobileSidebar = ({
   className,
   children,
@@ -144,9 +133,9 @@ export const MobileSidebar = ({
   const { theme, toggleTheme } = useTheme();
   const { setOpen } = useSidebar();
 
-  // Ensure sidebar links are expanded in mobile
+  // ✅ Ensure mobile sidebar stays CLOSED by default
   React.useEffect(() => {
-    setOpen(true);
+    setOpen(false);
   }, [setOpen]);
 
   return (
@@ -155,46 +144,28 @@ export const MobileSidebar = ({
       <div
         className={cn(
           "h-16 px-5 flex items-center justify-between lg:hidden fixed top-0 left-0 right-0 z-50",
-          "bg-[hsl(var(--card))] backdrop-blur-xl border-b border-white/10",
-          "shadow-[inset_2px_2px_6px_hsl(var(--shadow-light)),inset_-2px_-2px_6px_hsl(var(--shadow-dark))]"
+          "bg-[hsl(var(--card))] backdrop-blur-xl border-b border-white/10"
         )}
       >
-        <div className="text-xl font-bold text-glow">CODE VIVEKS</div>
+        <div className="text-xl font-bold">CODE VIVEKS</div>
 
         <div className="flex items-center gap-3">
-          {/* Theme Toggle */}
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={toggleTheme}
-            className="p-2 rounded-xl bg-[hsl(var(--card))] shadow-[inset_1px_1px_3px_hsl(var(--shadow-light)),inset_-1px_-1px_3px_hsl(var(--shadow-dark))]"
-          >
-            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          <motion.button whileTap={{ scale: 0.9 }} onClick={toggleTheme}
+            className="p-2 rounded-xl bg-[hsl(var(--card))]">
+            {theme === "dark" ? <Sun /> : <Moon />}
           </motion.button>
 
-          {/* Join Button */}
-          <motion.a
-            href="https://forms.gle/hPaXQNf8nhrdas3M8"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-primary to-secondary text-primary-foreground font-semibold text-sm shadow-[2px_2px_6px_hsl(var(--shadow-dark)),_-2px_-2px_6px_hsl(var(--shadow-light))]"
-          >
-            Join
-          </motion.a>
-
-          {/* Menu Toggle */}
           <motion.button
             whileTap={{ scale: 0.9 }}
             onClick={() => setMenuOpen(!menuOpen)}
-            className="p-2 rounded-xl bg-[hsl(var(--card))] shadow-[inset_1px_1px_3px_hsl(var(--shadow-light)),inset_-1px_-1px_3px_hsl(var(--shadow-dark))]"
+            className="p-2 rounded-xl bg-[hsl(var(--card))]"
           >
             {menuOpen ? <X /> : <Menu />}
           </motion.button>
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      {/* Drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -204,8 +175,7 @@ export const MobileSidebar = ({
             transition={{ duration: 0.3 }}
             className={cn(
               "fixed top-16 left-0 right-0 z-40 p-6 space-y-4",
-              "bg-[hsl(var(--card))] backdrop-blur-2xl border-t border-white/10",
-              "shadow-[4px_4px_10px_hsl(var(--shadow-dark)),_-4px_-4px_10px_hsl(var(--shadow-light))]"
+              "bg-[hsl(var(--card))] backdrop-blur-2xl border-t border-white/10"
             )}
           >
             {children}
@@ -217,8 +187,8 @@ export const MobileSidebar = ({
 };
 
 /* ============================
-   🔗 Sidebar Link (Neumorphic)
-   ============================ */
+   🔗 Sidebar Link
+============================ */
 export const SidebarLink = ({
   link,
   className,
@@ -232,27 +202,18 @@ export const SidebarLink = ({
     <motion.a
       href={link.href}
       whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
-      transition={{ duration: 0.18, ease: [0.25, 0.8, 0.25, 1] }}
       className={cn(
-        "flex items-center gap-3 py-3 px-4 rounded-xl cursor-pointer transition-all duration-200",
-        "bg-[hsl(var(--card))] text-foreground hover:shadow-[3px_3px_8px_hsl(var(--shadow-dark)),_-3px_-3px_8px_hsl(var(--shadow-light))]",
-        "active:shadow-[inset_3px_3px_8px_hsl(var(--shadow-dark)),inset_-3px_-3px_8px_hsl(var(--shadow-light))]",
+        "flex items-center gap-3 py-3 px-4 rounded-xl cursor-pointer",
+        "bg-[hsl(var(--card))] hover:bg-white/5 transition-all",
         className
       )}
     >
-      <motion.div whileHover={{ rotate: 2 }} transition={{ duration: 0.12 }}>
-        {link.icon}
-      </motion.div>
-
-      {/* --------------  text slides & fades -------------- */}
+      {link.icon}
       <motion.span
-        initial={false}
         animate={{
           opacity: animate ? (open ? 1 : 0) : 1,
-          x: animate ? (open ? 0 : -14) : 0,
+          x: animate ? (open ? 0 : -12) : 0,
         }}
-        transition={{ duration: 0.18, ease: [0.25, 0.8, 0.25, 1] }}
         className="text-sm font-medium whitespace-nowrap overflow-hidden"
       >
         {link.label}

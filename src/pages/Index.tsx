@@ -31,6 +31,7 @@ import Contact from "@/components/Contact";
 import ArtisticBackground from "@/components/ArtisticBackground";
 import Preloader from "@/components/Preloader";
 import logo from "@/assets/logo.png";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const Index = () => {
   const [open, setOpen] = useState(false);
@@ -65,7 +66,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="relative min-h-screen flex w-full bg-background text-foreground overflow-x-hidden transition-colors duration-500 ">
+    <div className="relative min-h-screen flex w-full bg-background text-foreground overflow-x-hidden transition-colors duration-500">
       <ArtisticBackground />
 
       {/* 🌀 Preloader Overlay */}
@@ -121,19 +122,22 @@ const Index = () => {
 
       {/* 🧱 Main Page Content (pre-rendered under loader) */}
       <main
-        className={`flex-1 w-full lg:ml-[72px] px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10 space-y-10 transition-opacity duration-700 ${
-          isLoaded ? "opacity-100" : "opacity-0"
-        }`}
+        className={`flex-1 w-full lg:ml-[72px] px-3 sm:px-4 md:px-6 py-6 sm:py-8 md:py-10 space-y-10 transition-opacity duration-700 ${isLoaded ? "opacity-100" : "opacity-0"
+          }`}
       >
-        {sections.map((section) => (
-          <section
-            key={section.id}
-            id={section.id}
-            className={`${section.style} rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8`}
-          >
-            {section.component}
-          </section>
+
+
+        {sections.map((section, index) => (
+          <ScrollReveal key={section.id} delay={index * 0.07}>
+            <section
+              id={section.id}
+              className={`${section.style} rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-6 lg:p-8`}
+            >
+              {section.component}
+            </section>
+          </ScrollReveal>
         ))}
+
       </main>
     </div>
   );
