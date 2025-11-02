@@ -71,47 +71,74 @@
    🌫️ Elite Frosted Glass – Layered Depth
    =================================================== */
 
+/* ✅ GPU-SAFE FROSTED GLASS (no blur) */
 .glass {
-  background: hsla(var(--glass-bg));
-  backdrop-filter: blur(32px) saturate(180%);
-  -webkit-backdrop-filter: blur(32px) saturate(180%);
-  border: 1px solid hsla(var(--glass-border));
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), 0 4px 16px rgba(0, 0, 0, 0.15),
-    inset 0 0 0.5px rgba(255, 255, 255, 0.15),
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 28px rgba(0, 0, 0, 0.18),
+    0 4px 14px rgba(0, 0, 0, 0.12),
+    inset 0 0 0.5px rgba(255, 255, 255, 0.18),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: translateZ(0);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
 
 .glass:hover {
-  backdrop-filter: blur(40px) saturate(200%);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25), 0 6px 20px rgba(0, 0, 0, 0.18),
-    inset 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.24),
+    0 6px 18px rgba(0, 0, 0, 0.15),
+    inset 0 0 1px rgba(255, 255, 255, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
 
-/* Stronger glass for modals/navs */
+/* ✅ Strong Version (Sidebar, Navs, Modals) */
 .glass-strong {
-  background: hsla(var(--glass-bg) / 0.8);
-  backdrop-filter: blur(48px) saturate(200%);
-  -webkit-backdrop-filter: blur(48px) saturate(200%);
-  border: 1px solid hsla(var(--glass-border));
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25), 0 8px 24px rgba(0, 0, 0, 0.15),
-    inset 0 0 1px rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.28),
+    0 8px 22px rgba(0, 0, 0, 0.16),
+    inset 0 0 1px rgba(255, 255, 255, 0.25);
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transform: translateZ(0);
 }
 
+/* ✅ Glass Button stays but GPU-safe */
 .glass-btn {
   background: linear-gradient(
     135deg,
     hsl(var(--primary)),
     hsl(var(--secondary))
   );
-  box-shadow: 0 4px 16px hsla(var(--primary) / 0.4),
+  box-shadow:
+    0 4px 16px hsla(var(--primary) / 0.4),
     0 2px 8px hsla(var(--secondary) / 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform .25s ease, box-shadow .25s ease;
 }
+
+.glass-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 6px 22px hsla(var(--primary) / 0.5),
+    0 3px 10px hsla(var(--secondary) / 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+}
+
+/* ✅ MOBILE PERFORMANCE MODE (extra safe) */
+@media (max-width: 768px) {
+  .glass,
+  .glass-strong {
+    box-shadow: none !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+}
+
 
 /* ===================================================
    🩵 Premium Neumorphism – Soft Depth
@@ -127,8 +154,196 @@
   will-change: transform, box-shadow;
 }
 
+.neumorphic:hover {
+  transform: translateY(-3px);
+  box-shadow: 12px 12px 24px rgba(0, 0, 0, 0.3),
+    -12px -12px 24px rgba(255, 255, 255, 0.04),
+    inset 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+.neumorphic-soft {
+  background: hsl(var(--card));
+  border-radius: var(--radius);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2),
+    -6px -6px 12px rgba(255, 255, 255, 0.02),
+    inset 0 0 0.5px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Inset/Pressed Effect */
+.neumorphic-inset {
+  background: hsl(var(--card));
+  box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.25),
+    inset -4px -4px 8px rgba(255, 255, 255, 0.02);
+}
+
+/* Buttons */
+.neumorphic-btn {
+  background: hsl(var(--card));
+  border-radius: 9999px;
+  padding: 0.8rem 1.4rem;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.25),
+    -6px -6px 12px rgba(255, 255, 255, 0.03);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, box-shadow;
+}
+
+.neumorphic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.3),
+    -8px -8px 16px rgba(255, 255, 255, 0.04);
+}
+
+.neumorphic-btn:active {
+  transform: translateY(1px);
+  box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.3),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.02);
+}
+
 /* ===================================================
-   🧭 Scrollbar Style
+   ✨ Premium Glow Effects
+   =================================================== */
+
+.text-glow {
+  transition: text-shadow 0.3s ease, color 0.3s ease;
+}
+
+:root.dark .text-glow {
+  text-shadow: 0 0 8px hsla(var(--glow-primary) / 0.5),
+    0 0 16px hsla(var(--glow-primary) / 0.3);
+}
+
+:root.dark .text-glow-secondary {
+  text-shadow: 0 0 8px hsla(var(--glow-secondary) / 0.5),
+    0 0 16px hsla(var(--glow-secondary) / 0.3);
+}
+
+.neon-border {
+  border: 1px solid hsla(var(--primary) / 0.3);
+  box-shadow: 0 0 10px hsla(var(--primary) / 0.15),
+    inset 0 0 10px hsla(var(--primary) / 0.05);
+}
+
+.neon-border-secondary {
+  border: 1px solid hsla(var(--secondary) / 0.3);
+  box-shadow: 0 0 10px hsla(var(--secondary) / 0.15),
+    inset 0 0 10px hsla(var(--secondary) / 0.05);
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px hsla(var(--primary) / 0.2),
+    0 0 40px hsla(var(--primary) / 0.1);
+}
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 12px hsla(var(--primary) / 0.4));
+}
+
+/* ===================================================
+   🌈 Premium Gradient Text
+   =================================================== */
+
+.text-gradient {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--primary)),
+    hsl(var(--secondary))
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===================================================
+   🎬 Premium Micro Animations
+   =================================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-popIn {
+  animation: popIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+/* ===================================================
+   🧭 Scrollbar – Premium Minimal Style
    =================================================== */
 
 ::-webkit-scrollbar {
@@ -142,37 +357,79 @@
   transition: background 0.2s ease;
 }
 
-/* ===================================================
-   ⚡ Performance / Scrolling Fix
-   =================================================== */
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.6);
+}
 
-html, body {
-  min-height: 100dvh;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* ===================================================
-   📱 Mobile Performance Patch
+   ⚡ Performance Optimizations
    =================================================== */
 
+/* Hardware acceleration for animations */
+.glass,
+.neumorphic,
+.neumorphic-btn,
+.hover-lift {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Optimize smooth scrolling */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===================================================
+   🎨 Utility Classes
+   =================================================== */
+
+.content-visibility-auto {
+  content-visibility: auto;
+}
+
+.contain-paint {
+  contain: paint;
+}
+/* Base gradient background */
+.bg-gradient {
+  background: radial-gradient(
+      circle at 30% 20%,
+      rgba(90, 150, 255, 0.25),
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(255, 120, 200, 0.25),
+      transparent 60%
+    ),
+    linear-gradient(135deg, #0b0e16 0%, #111827 100%);
+}
+
+/* Pre-blurred GPU-safe layer */
+.blur-bg {
+  filter: blur(24px);
+  transform: translateZ(0);
+}
+
+/* Mobile optimization */
 @media (max-width: 768px) {
-  .glass,
-  .glass-strong {
-    backdrop-filter: blur(12px) saturate(140%);
-    -webkit-backdrop-filter: blur(12px) saturate(140%);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
-  }
-
-  .neumorphic,
-  .neumorphic-soft,
-  .neumorphic-btn {
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.22),
-      -4px -4px 8px rgba(255, 255, 255, 0.02);
-  }
-
-  * {
-    will-change: auto !important;
-    transform: translateZ(0);
+  .blur-bg {
+    filter: blur(10px) !important;
   }
 }
