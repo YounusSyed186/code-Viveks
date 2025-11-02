@@ -10,7 +10,7 @@ import ViceAndTreasurer from "@/assets/visetreasurer.jpg";
 import Event from "@/assets/event.jpg";
 import PROutreachHead from "@/assets/pr.jpg";
 import OperationsHead from "@/assets/operations.jpg";
-import PhotographyHead from "@/assets/logo.png";
+import PhotographyHead from "@/assets/Photgraphy.jpg";
 import DesigningHead from "@/assets/logo.png";
 import FacultyCoordinator from "@/assets/logo.png";
 import Technical from "@/assets/Technical.jpg";
