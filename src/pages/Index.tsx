@@ -65,7 +65,7 @@ const Index = () => {
   ];
 
   return (
-    <div className="relative min-h-screen flex w-full bg-background text-foreground overflow-x-hidden transition-colors duration-500">
+    <div className="relative min-h-screen flex w-full bg-background text-foreground overflow-x-hidden transition-colors duration-500 ">
       <ArtisticBackground />
 
       {/* 🌀 Preloader Overlay */}

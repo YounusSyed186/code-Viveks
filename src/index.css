@@ -9,90 +9,72 @@
 @layer base {
   :root {
     /* ===== DARK MODE ===== */
-    --background: 222 15% 9%;
+    --background: 222 12% 10%;
     --foreground: 0 0% 96%;
 
-    --card: 222 15% 13%;
+    --card: 222 12% 14%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 222 15% 11%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 211 100% 62%;
+    /* Luxury Blue (Primary) */
+    --primary: 227 72% 65%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 200 98% 58%;
-    --secondary-foreground: 0 0% 100%;
+    /* Soft Lavender-Grey (Secondary) */
+    --secondary: 260 16% 72%;
+    --secondary-foreground: 0 0% 12%;
 
-    --muted: 222 15% 18%;
+    /* Muted Neutrals */
+    --muted: 222 10% 20%;
     --muted-foreground: 0 0% 70%;
 
-    --accent: 215 95% 70%;
+    /* Deep Charcoal Accent */
+    --accent: 220 8% 22%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 58%;
-    --destructive-foreground: 0 0% 100%;
+    --border: 222 10% 20%;
+    --ring: 227 72% 65%;
 
-    --border: 222 15% 20%;
-    --input: 222 15% 20%;
-    --ring: 211 100% 62%;
+    /* Soft, diffused glow — no neon */
+    --glow-primary: 227 72% 65% / 0.2;
+    --glow-secondary: 260 16% 72% / 0.2;
 
+    /* ===== Frosted Glass Variables ===== */
+    --glass-bg: 222 12% 14% / 0.45;
+    --glass-border: 222 10% 28% / 0.5;
+
+    /* Neumorphic radius */
     --radius: 1rem;
-
-    /* Premium Frost + Glow */
-    --glass-bg: 222 15% 9% / 0.55;
-    --glass-border: 0 0% 100% / 0.05;
-    --glow-primary: 211 100% 70%;
-    --glow-secondary: 200 98% 60%;
-
-    /* ===== LIGHT MODE ===== */
-    &:not(.dark) {
-      --background: 210 40% 99%;
-      --foreground: 222 15% 10%;
-
-      --card: 0 0% 100%;
-      --card-foreground: 222 15% 10%;
-
-      --popover: 0 0% 100%;
-      --popover-foreground: 222 15% 10%;
-
-      --primary: 211 100% 55%;
-      --primary-foreground: 0 0% 100%;
-
-      --secondary: 200 98% 45%;
-      --secondary-foreground: 0 0% 100%;
-
-      --muted: 210 40% 96%;
-      --muted-foreground: 215 16% 47%;
-
-      --accent: 210 40% 97%;
-      --accent-foreground: 222 84% 5%;
-
-      --border: 214 32% 90%;
-      --input: 214 32% 90%;
-      --ring: 211 100% 55%;
-
-      --glow-primary: 211 100% 55%;
-      --glow-secondary: 200 98% 45%;
-      --glass-bg: 210 40% 98% / 0.6;
-      --glass-border: 214 32% 88% / 0.35;
-    }
   }
 
-  * {
-    @apply border-border;
-  }
+  /* ===== LIGHT MODE ===== */
+  :root:not(.dark) {
+    --background: 220 15% 98%;
+    --foreground: 222 12% 10%;
 
-  body {
-    @apply bg-background text-foreground;
-    font-family: "SF Pro Display", "Inter", system-ui, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    transition: background 0.35s ease, color 0.35s ease;
-  }
+    --card: 0 0% 100%;
+    --card-foreground: 222 12% 10%;
 
-  html {
-    scroll-behavior: smooth;
+    --primary: 226 75% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 258 18% 64%;
+    --secondary-foreground: 0 0% 8%;
+
+    --muted: 220 16% 92%;
+    --muted-foreground: 222 10% 45%;
+
+    --accent: 220 10% 26%;
+    --accent-foreground: 0 0% 100%;
+
+    --border: 220 12% 82%;
+    --ring: 226 75% 55%;
+
+    --glow-primary: 226 75% 55% / 0.18;
+    --glow-secondary: 258 18% 64% / 0.18;
+
+    /* Premium Light Frosted Glass */
+    --glass-bg: 220 15% 98% / 0.55;
+    --glass-border: 220 12% 82% / 0.55;
   }
 }
 
@@ -108,53 +90,39 @@
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.2),
     0 4px 16px rgba(0, 0, 0, 0.15),
-    inset 0 0 0.5px rgba(255, 255, 255, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform;
+    inset 0 1px rgba(255, 255, 255, 0.08);
+  transition: 0.3s;
 }
 
 .glass:hover {
   backdrop-filter: blur(40px) saturate(200%);
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.25),
-    0 6px 20px rgba(0, 0, 0, 0.18),
-    inset 0 0 1px rgba(255, 255, 255, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
 
-/* Stronger glass for modals/navs */
+/* Strong glass for modals/navs */
 .glass-strong {
   background: hsla(var(--glass-bg) / 0.8);
   backdrop-filter: blur(48px) saturate(200%);
-  -webkit-backdrop-filter: blur(48px) saturate(200%);
   border: 1px solid hsla(var(--glass-border));
-  box-shadow: 
-    0 16px 48px rgba(0, 0, 0, 0.25),
-    0 8px 24px rgba(0, 0, 0, 0.15),
-    inset 0 0 1px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.4);
 }
 
+/* Gradient Glass Button */
 .glass-btn {
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
-  box-shadow:
-    0 4px 16px hsla(var(--primary) / 0.4),
-    0 2px 8px hsla(var(--secondary) / 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding: 0.8rem 1.3rem;
+  border-radius: 0.8rem;
+  color: white;
+  box-shadow: 0 4px 18px hsla(var(--primary) / 0.4);
+  transition: 0.3s;
 }
 
 .glass-btn:hover {
-  box-shadow:
-    0 6px 20px hsla(var(--primary) / 0.5),
-    0 3px 12px hsla(var(--secondary) / 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* ===================================================
-   🩵 Premium Neumorphism – Soft Depth
+   🩵 Premium Neumorphism
    =================================================== */
 
 .neumorphic {
@@ -162,268 +130,34 @@
   border-radius: var(--radius);
   box-shadow:
     10px 10px 20px rgba(0, 0, 0, 0.25),
-    -10px -10px 20px rgba(255, 255, 255, 0.03),
-    inset 0 0 0.5px rgba(255, 255, 255, 0.15);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, box-shadow;
+    -10px -10px 20px rgba(255, 255, 255, 0.03);
+  transition: 0.3s;
 }
 
 .neumorphic:hover {
   transform: translateY(-3px);
-  box-shadow:
-    12px 12px 24px rgba(0, 0, 0, 0.3),
-    -12px -12px 24px rgba(255, 255, 255, 0.04),
-    inset 0 0 1px rgba(255, 255, 255, 0.2);
-}
-
-.neumorphic-soft {
-  background: hsl(var(--card));
-  border-radius: var(--radius);
-  box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.2),
-    -6px -6px 12px rgba(255, 255, 255, 0.02),
-    inset 0 0 0.5px rgba(255, 255, 255, 0.1);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Inset/Pressed Effect */
-.neumorphic-inset {
-  background: hsl(var(--card));
-  box-shadow:
-    inset 4px 4px 8px rgba(0, 0, 0, 0.25),
-    inset -4px -4px 8px rgba(255, 255, 255, 0.02);
-}
-
-/* Buttons */
-.neumorphic-btn {
-  background: hsl(var(--card));
-  border-radius: 9999px;
-  padding: 0.8rem 1.4rem;
-  box-shadow:
-    6px 6px 12px rgba(0, 0, 0, 0.25),
-    -6px -6px 12px rgba(255, 255, 255, 0.03);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  will-change: transform, box-shadow;
-}
-
-.neumorphic-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    8px 8px 16px rgba(0, 0, 0, 0.3),
-    -8px -8px 16px rgba(255, 255, 255, 0.04);
-}
-
-.neumorphic-btn:active {
-  transform: translateY(1px);
-  box-shadow:
-    inset 3px 3px 6px rgba(0, 0, 0, 0.3),
-    inset -3px -3px 6px rgba(255, 255, 255, 0.02);
 }
 
 /* ===================================================
-   ✨ Premium Glow Effects
-   =================================================== */
-
-.text-glow {
-  transition: text-shadow 0.3s ease, color 0.3s ease;
-}
-
-:root.dark .text-glow {
-  text-shadow:
-    0 0 8px hsla(var(--glow-primary) / 0.5),
-    0 0 16px hsla(var(--glow-primary) / 0.3);
-}
-
-:root.dark .text-glow-secondary {
-  text-shadow:
-    0 0 8px hsla(var(--glow-secondary) / 0.5),
-    0 0 16px hsla(var(--glow-secondary) / 0.3);
-}
-
-.neon-border {
-  border: 1px solid hsla(var(--primary) / 0.3);
-  box-shadow: 
-    0 0 10px hsla(var(--primary) / 0.15),
-    inset 0 0 10px hsla(var(--primary) / 0.05);
-}
-
-.neon-border-secondary {
-  border: 1px solid hsla(var(--secondary) / 0.3);
-  box-shadow: 
-    0 0 10px hsla(var(--secondary) / 0.15),
-    inset 0 0 10px hsla(var(--secondary) / 0.05);
-}
-
-.glow-primary {
-  box-shadow: 
-    0 0 20px hsla(var(--primary) / 0.2),
-    0 0 40px hsla(var(--primary) / 0.1);
-}
-
-.drop-shadow-glow {
-  filter: drop-shadow(0 0 12px hsla(var(--primary) / 0.4));
-}
-
-/* ===================================================
-   🌈 Premium Gradient Text
+   ✨ Glow & Gradient Text
    =================================================== */
 
 .text-gradient {
   background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: transparent;
+}
+
+.text-glow {
+  text-shadow: 0 0 24px hsla(var(--primary) / 0.35);
 }
 
 /* ===================================================
-   🎬 Premium Micro Animations
+   🧭 Minimal Scrollbar
    =================================================== */
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes popIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-popIn {
-  animation: popIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-slideInLeft {
-  animation: slideInLeft 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-slideInRight {
-  animation: slideInRight 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.animate-scaleIn {
-  animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Hover Lift Effect */
-.hover-lift {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hover-lift:hover {
-  transform: translateY(-4px);
-}
-
-/* ===================================================
-   🧭 Scrollbar – Premium Minimal Style
-   =================================================== */
-
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
+::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary) / 0.3);
-  border-radius: 6px;
-  transition: background 0.2s ease;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--primary) / 0.6);
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-/* ===================================================
-   ⚡ Performance Optimizations
-   =================================================== */
-
-/* Hardware acceleration for animations */
-.glass,
-.neumorphic,
-.neumorphic-btn,
-.hover-lift {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-/* Optimize smooth scrolling */
-.scroll-smooth {
-  scroll-behavior: smooth;
-}
-
-/* Reduce motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
-
-/* ===================================================
-   🎨 Utility Classes
-   =================================================== */
-
-.content-visibility-auto {
-  content-visibility: auto;
-}
-
-.contain-paint {
-  contain: paint;
+  background: hsl(var(--primary) / 0.35);
+  border-radius: 10px;
 }

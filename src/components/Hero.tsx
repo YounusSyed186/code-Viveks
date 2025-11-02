@@ -10,7 +10,7 @@ const Hero = memo(() => {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100vh-2rem)] sm:min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-0 bg-background text-foreground transition-colors duration-700"
+      className="relative min-h-[calc(100vh-2rem)] sm:min-h-screen flex items-center justify-center overflow-hidden pt-10 md:pt-0 bg-background text-foreground transition-colors duration-700 p-0"
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/4 w-[16rem] sm:w-[24rem] md:w-[28rem] h-[16rem] sm:h-[24rem] md:h-[28rem] bg-primary/15 blur-[80px] sm:blur-[120px] rounded-full animate-float" />
