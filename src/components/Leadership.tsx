@@ -58,7 +58,7 @@ const Leadership = memo(() => {
       {
         quote:
           "Handles public relations, outreach, and branding activities to promote CODE VIVEKS and expand its community presence.",
-        name: "Sirisha",
+        name: "C.Sirisha",
         designation: "PR & Outreach Head",
         src: PROutreachHead,
       },
